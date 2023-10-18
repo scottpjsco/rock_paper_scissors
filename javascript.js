@@ -1,28 +1,50 @@
-// function getComputerChoice (choice){
-//     return "The computer chose " + choice
+// function getComputerChoice() {
+// //Define an array of possible choices
+// const choices = ["Rock", "Paper", "Scissors"];
+
+// // Generate a random index to select a choice
+// const randomIndex = Math.floor(Math.random() * choices.length)
+
+// //Return the choice of the random index
+// return choices[randomIndex];
 
 // }
+// const computerSelection = getComputerChoice();
+// console.log("The computer chose: " + computerSelection);
 
-// console.log(getComputerChoice("Rock" || "Paper" || "Scissors"));
+function playRound(playerSelection, computerSelection) {
+    //Convert both selections to lower case
+    playerSelection = playerSelection.toLowerCase();
+    computerSelection = computerSelection.toLowerCase();
 
+    //Define an array of valid selections
+    const validSelections = ["rock", "paper", "scissors"];
 
+    //check if the player's Selection is valid
+    if (!validSelections.includes(playerSelection)) {
+        return "Invalid selection. Please choose from rock, paper or scissors.";
+    }
 
-//function to get computers choice 
-    // inside is a function to get a random number between 1 and 3
-// 1 is assiagned to rock
-// 2 is assigned to paper
-// 3 is asigned to scissors
+    //Generate a random selection for the computer
+    const randomIndex = Math.floor(Math.random() * validSelections.length);
+    const randomComputerSelection = validSelections[randomIndex];
 
-function getComputerChoice() {
-//Define an array of possible choices
-const choices = ["Rock", "Paper", "Scissors"];
-
-// Generate a random index to select a choice
-const randomIndex = Math.floor(Math.random() * choices.length)
-
-//Return the choice of the random index
-return choices[randomIndex];
-
+    // Compare the player and computers selection to determine a winner
+    if (playerSelection === computerSelection) {
+        return "It's a draw! You both chose " + playerSelection;
+    } else if ( 
+        (playerSelection === "rock" && computerSelection === "scissors") ||
+        (playerSelection === "scissors" && computerSelection === "paper") ||
+        (playerSelection === "paper" && computerSelection === "rock") 
+    ) {
+        return "You win! " + playerSelection + " beats " + computerSelection;
+    } else {
+        return "You Lose! " + computerSelection + " beats " + playerSelection;
+    }
 }
-const computerSelection = getComputerChoice();
-console.log("The computer chose: " + computerSelection);
+
+// Example usage
+const playerSelection = "rock";
+const computerSelection = "scissors";
+const result = playRound(playerSelection, computerSelection);
+console.log(result);
