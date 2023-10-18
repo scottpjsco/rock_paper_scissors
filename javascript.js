@@ -1,17 +1,3 @@
-// function getComputerChoice() {
-// //Define an array of possible choices
-// const choices = ["Rock", "Paper", "Scissors"];
-
-// // Generate a random index to select a choice
-// const randomIndex = Math.floor(Math.random() * choices.length)
-
-// //Return the choice of the random index
-// return choices[randomIndex];
-
-// }
-// const computerSelection = getComputerChoice();
-// console.log("The computer chose: " + computerSelection);
-
 function playRound(playerSelection, computerSelection) {
     //Convert both selections to lower case
     playerSelection = playerSelection.toLowerCase();
@@ -43,8 +29,41 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-// Example usage
-const playerSelection = "rock";
-const computerSelection = "scissors";
-const result = playRound(playerSelection, computerSelection);
-console.log(result);
+function getComputerChoice() {
+    const choices = ["rock", "paper", "scissors"];
+    const randomIndex = Math.floor(Math.random() * choices.length);
+    return choices[randomIndex];
+  }
+
+function game() {
+    let playerScore = 0;
+    let computerScore = 0;
+  
+    for (let round = 1; round <= 5; round++) {
+      const playerSelection = prompt(`Round ${round}: Enter your choice (Rock, Paper, or Scissors):`);
+      const computerSelection = getComputerChoice();
+  
+      const result = playRound(playerSelection, computerSelection);
+      console.log(result);
+  
+      if (result.includes("Win")) {
+        playerScore++;
+      } else if (result.includes("Lose")) {
+        computerScore++;
+      }
+    }
+  
+    console.log("Game over! Here's the final score:");
+    console.log(`Player: ${playerScore} - Computer: ${computerScore}`);
+  
+    if (playerScore > computerScore) {
+      console.log("Congratulations! You win the game!");
+    } else if (playerScore < computerScore) {
+      console.log("Sorry, you lose the game.");
+    } else {
+      console.log("It's a tie game!");
+    }
+  }
+  
+  // Call the game function to start the game
+  game();
