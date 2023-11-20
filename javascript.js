@@ -1,3 +1,6 @@
+
+
+
 // Function to play a single round of Rock, Paper, Scissors
 function playRound(playerSelection, computerSelection) {
   // Convert both selections to lower case for case-insensitive comparison
@@ -19,6 +22,22 @@ function playRound(playerSelection, computerSelection) {
   // Function to get a random choice for the computer
 
 }
+
+// Get references to the buttons
+const rockButton = document.getElementById('rock-button');
+const paperButton = document.getElementById('paper-button');
+const scissorsButton = document.getElementById('scissors-button');
+
+//Add event listeners to the buttons
+rockButton.addEventListener('click', function () {
+    playRound ('rock');
+});
+paperButton.addEventListener('click', function () {
+    playRound ('paper');
+});
+scissorsButton.addEventListener('click', function () {
+    playRound ('scissors');
+});
 
 function getComputerChoice() {
     const choices = ["rock", "paper", "scissors"];
@@ -74,6 +93,10 @@ function game() {
       console.log("It's a tie game!");
   }
 }
+
+
+
+
 
 // Call the game function to start the game
 game();
