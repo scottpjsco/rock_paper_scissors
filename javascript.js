@@ -19,8 +19,18 @@ function playRound(playerSelection, computerSelection) {
   const randomIndex = Math.floor(Math.random() * validSelections.length);
   const randomComputerSelection = validSelections[randomIndex];
 
-  // Function to get a random choice for the computer
-
+// Compare the player and computer's selection to determine a winner
+if (playerSelection === computerSelection) {
+    return "It's a draw! You both chose " + playerSelection;
+} else if ( 
+    (playerSelection === "rock" && computerSelection === "scissors") ||
+    (playerSelection === "scissors" && computerSelection === "paper") ||
+    (playerSelection === "paper" && computerSelection === "rock") 
+) {
+    return "You win! " + playerSelection + " beats " + computerSelection;
+} else {
+    return "You lose! " + computerSelection + " beats " + playerSelection;
+}
 }
 
 // Get references to the buttons
@@ -45,18 +55,7 @@ function getComputerChoice() {
     return choices[randomIndex];
 }
 
-  // Compare the player and computer's selection to determine a winner
-  if (playerSelection === computerSelection) {
-      return "It's a draw! You both chose " + playerSelection;
-  } else if ( 
-      (playerSelection === "rock" && computerSelection === "scissors") ||
-      (playerSelection === "scissors" && computerSelection === "paper") ||
-      (playerSelection === "paper" && computerSelection === "rock") 
-  ) {
-      return "You win! " + playerSelection + " beats " + computerSelection;
-  } else {
-      return "You lose! " + computerSelection + " beats " + playerSelection;
-  }
+  
 
 
 
@@ -93,10 +92,6 @@ function game() {
       console.log("It's a tie game!");
   }
 }
-
-
-
-
 
 // Call the game function to start the game
 game();
