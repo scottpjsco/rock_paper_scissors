@@ -1,5 +1,6 @@
-
-
+document.addEventListener('DOMContentLoaded', function () {
+let playerScore = 0;
+let computerScore = 0;
 
 // Function to play a single round of Rock, Paper, Scissors
 function playRound(playerSelection, computerSelection) {
@@ -40,14 +41,48 @@ const scissorsButton = document.getElementById('scissors-button');
 
 //Add event listeners to the buttons
 rockButton.addEventListener('click', function () {
-    playRound ('rock');
+   const result = playRound ('rock', getComputerChoice());
+   displayResult(result);
 });
 paperButton.addEventListener('click', function () {
-    playRound ('paper');
-});
-scissorsButton.addEventListener('click', function () {
-    playRound ('scissors');
-});
+    const result = playRound('paper', getComputerChoice());
+    displayResult(result);
+  });
+
+ scissorsButton.addEventListener('click', function () {
+    const result = playRound('scissors', getComputerChoice());
+    displayResult(result);
+  });
+
+
+// Function to display the results in the result-container div
+function displayResult(result) {
+    const resultContainer = document.getElementById('result-container');
+    const roundResultElement = document.getElementById('round-result');
+    const gameScoreElement = document.getElementById('game-score');
+
+    roundResultElement.textContent = result;
+
+    //update scores based on the result of each round
+    if (result.includes("Win")){
+        playerScore++;
+    }
+    else if (result.includes("Lose")){
+        computerScore++;
+    }
+
+    //Display the updated Score
+    gameScoreElement.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+
+    //Check for a winner
+    if (playerScore === 5) {
+        roundResultElement.textContent = "Congratulations! You win the game!";
+        resetGame();
+    } else if (computerScore === 5) {
+        roundResultElement.textContent = "Sorry, you're not a winner."
+        resetGame();
+    }
+}
 
 function getComputerChoice() {
     const choices = ["rock", "paper", "scissors"];
@@ -55,43 +90,13 @@ function getComputerChoice() {
     return choices[randomIndex];
 }
 
-  
-
-
-
-// Function to simulate a game of Rock, Paper, Scissors
-function game() {
-  let playerScore = 0;
-  let computerScore = 0;
-
-  // Play 5 rounds of the game
-  for (let round = 1; round <= 5; round++) {
-      const playerSelection = prompt(`Round ${round}: Enter your choice (Rock, Paper, or Scissors):`);
-      const computerSelection = getComputerChoice();
-
-      const result = playRound(playerSelection, computerSelection);
-      console.log(result);
-
-      // Update scores based on the result of each round
-      if (result.includes("Win")) {
-          playerScore++;
-      } else if (result.includes("Lose")) {
-          computerScore++;
-      }
-  }
-
-  // Display the final score and determine the overall winner
-  console.log("Game over! Here's the final score:");
-  console.log(`Player: ${playerScore} - Computer: ${computerScore}`);
-
-  if (playerScore > computerScore) {
-      console.log("Congratulations! You win the game!");
-  } else if (playerScore < computerScore) {
-      console.log("Sorry, you lose the game.");
-  } else {
-      console.log("It's a tie game!");
-  }
+//Function to reset the game
+function resetGame() {
+    playerScore = 0;
+    computerScore = 0;
 }
 
 // Call the game function to start the game
 game();
+
+});
