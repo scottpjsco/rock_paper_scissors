@@ -39,6 +39,8 @@ const rockButton = document.getElementById('rock-button');
 const paperButton = document.getElementById('paper-button');
 const scissorsButton = document.getElementById('scissors-button');
 
+const buttons =[rockButton, paperButton, scissorsButton];
+
 //Add event listeners to the buttons
 rockButton.addEventListener('click', function () {
    const result = playRound ('rock', getComputerChoice());
@@ -67,10 +69,10 @@ function displayResult(result) {
     roundResultElement.textContent = result;
 
     //update scores based on the result of each round
-    if (result.includes("Win")){
+    if (result.includes("win")){
         playerScore++;
     }
-    else if (result.includes("Lose")){
+    else if (result.includes("lose")){
         computerScore++;
     }
 
@@ -88,6 +90,7 @@ function getComputerChoice() {
 function resetGame() {
     playerScore = 0;
     computerScore = 0;
+    enableButtons(buttons);
 }
 
 function handleClick(event) {
@@ -98,30 +101,38 @@ function handleClick(event) {
 
 function checkForWinner() {
     const roundResultElement = document.getElementById('round-result');
-    const buttons = document.querySelectorAll('button');
+    const gameScoreElement = document.getElementById('game-score');
     if (playerScore === 5) {
         roundResultElement.textContent = "Congratulations! You win the game!";
+        disableButtons();
         resetGame();
-        disableButtons(buttons);
+
     } else if (computerScore === 5) {
         roundResultElement.textContent = "Sorry, you're not a winner.";
+        disableButtons();
         resetGame();
-        disableButtons(buttons);
+
     }
 }
 
-function disableButtons(buttons){
-    buttons.forEach(button => {
-        button.removeEventListener('click', handleClick);
-        button.disabled = true;
-        
-    });
-}
+function disableButtons(){
+    rockButton.disabled = true;
+    paperButton.disabled = true;
+    scissorsButton.disabled = true;
+    };
 
-});
 
-// Add event listeners to the buttons outside of the event listener for DOMContentLoaded
-const buttons = document.querySelectorAll('button');
+    function enableButtons() {
+        rockButton.disabled = false;
+        paperButton.disabled = false;
+        scissorsButton.disabled = false;
+    }
+
+    // Add event listeners to the buttons outside of the event listener for DOMContentLoaded
 buttons.forEach(button => {
     button.addEventListener('click', handleClick);
 });
+
+});
+
+
