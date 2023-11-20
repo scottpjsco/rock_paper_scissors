@@ -16,6 +16,16 @@ function playRound(playerSelection, computerSelection) {
   const randomIndex = Math.floor(Math.random() * validSelections.length);
   const randomComputerSelection = validSelections[randomIndex];
 
+  // Function to get a random choice for the computer
+
+}
+
+function getComputerChoice() {
+    const choices = ["rock", "paper", "scissors"];
+    const randomIndex = Math.floor(Math.random() * choices.length);
+    return choices[randomIndex];
+}
+
   // Compare the player and computer's selection to determine a winner
   if (playerSelection === computerSelection) {
       return "It's a draw! You both chose " + playerSelection;
@@ -28,14 +38,8 @@ function playRound(playerSelection, computerSelection) {
   } else {
       return "You lose! " + computerSelection + " beats " + playerSelection;
   }
-}
 
-// Function to get a random choice for the computer
-function getComputerChoice() {
-  const choices = ["rock", "paper", "scissors"];
-  const randomIndex = Math.floor(Math.random() * choices.length);
-  return choices[randomIndex];
-}
+
 
 // Function to simulate a game of Rock, Paper, Scissors
 function game() {
